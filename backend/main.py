@@ -220,16 +220,21 @@ def receive_products(products: List[IncomingProduct], db: Session = Depends(get_
 def get_fast_sellers(
     days: int = Query(default=7, ge=1, le=90),
     limit: int = Query(default=100, ge=1, le=500),
+    category: Optional[str] = Query(default=None),
     db: Session = Depends(get_db),
 ):
     """即売れ商品一覧"""
     since = datetime.now() - timedelta(days=days)
 
-    sellers = db.query(Product).filter(
+    q = db.query(Product).filter(
         Product.status == "sold",
         Product.minutes_to_sell != None,
         Product.sold_at >= since,
-    ).order_by(Product.minutes_to_sell.asc()).limit(limit).all()
+    )
+    if category:
+        q = q.filter(Product.category == category)
+
+    sellers = q.order_by(Product.minutes_to_sell.asc()).limit(limit).all()
 
     return [
         {

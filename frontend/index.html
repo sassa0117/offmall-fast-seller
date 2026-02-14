@@ -83,6 +83,11 @@
         <div class="card-header">
             <h2>即売れ商品</h2>
             <div class="filters">
+                <div class="cat-filters">
+                    <button class="cat-filter active" data-cat="" onclick="changeCategory('')">すべて</button>
+                    <button class="cat-filter" data-cat="hobby" onclick="changeCategory('hobby')">ホビー</button>
+                    <button class="cat-filter" data-cat="fishing" onclick="changeCategory('fishing')">釣具</button>
+                </div>
                 <select onchange="changeDays(this.value)">
                     <option value="1">今日</option>
                     <option value="3">3日間</option>

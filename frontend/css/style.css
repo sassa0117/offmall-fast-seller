@@ -396,6 +396,36 @@ body {
     color: #c8f7e0;
 }
 
+/* ========== カテゴリフィルター ========== */
+
+.cat-filters {
+    display: flex;
+    gap: 4px;
+}
+
+.cat-filter {
+    padding: 4px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.15s;
+}
+
+.cat-filter.active {
+    background: #1a1a2e;
+    color: #fff;
+    border-color: #1a1a2e;
+}
+
+.cat-filter:hover:not(.active) {
+    background: #f0f0f0;
+    border-color: #bbb;
+}
+
 /* ========== レスポンシブ ========== */
 
 @media (max-width: 600px) {

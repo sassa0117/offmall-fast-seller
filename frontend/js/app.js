@@ -3,6 +3,7 @@
  */
 
 let currentDays = 7;
+let currentCategory = "";
 let keywords = [];
 
 // ========== タブ切り替え ==========
@@ -185,7 +186,9 @@ async function loadFastSellers() {
     container.innerHTML = '<div class="loading">読み込み中...</div>';
 
     try {
-        const r = await fetch(`/api/fast-sellers?days=${currentDays}&limit=100`);
+        let url = `/api/fast-sellers?days=${currentDays}&limit=100`;
+        if (currentCategory) url += `&category=${currentCategory}`;
+        const r = await fetch(url);
         const items = await r.json();
 
         if (items.length === 0) {
@@ -217,6 +220,13 @@ async function loadFastSellers() {
 
 function changeDays(days) {
     currentDays = days;
+    loadFastSellers();
+}
+
+function changeCategory(cat) {
+    currentCategory = cat;
+    document.querySelectorAll(".cat-filter").forEach(b => b.classList.remove("active"));
+    document.querySelector(`.cat-filter[data-cat="${cat}"]`).classList.add("active");
     loadFastSellers();
 }
 
