@@ -1,0 +1,411 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 16px;
+    padding-top: env(safe-area-inset-top, 16px);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.header h1 { font-size: 1.3rem; color: #1a1a2e; }
+
+.header-actions { display: flex; gap: 8px; }
+
+.btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.btn:hover { opacity: 0.85; }
+.btn-primary { background: #4361ee; color: #fff; }
+.btn-success { background: #2ec4b6; color: #fff; }
+.btn-danger { background: #e63946; color: #fff; }
+.btn-small { padding: 4px 10px; font-size: 0.8rem; }
+
+/* ========== 統計カード ========== */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #4361ee;
+}
+
+.stat-value.danger { color: #e63946; }
+.stat-value.success { color: #2ec4b6; }
+.stat-label { font-size: 0.75rem; color: #888; margin-top: 2px; }
+
+/* ========== タブ ========== */
+
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: none;
+    background: #e0e0e0;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab.active {
+    background: #fff;
+    color: #1a1a2e;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.06);
+}
+
+.tab:hover:not(.active) {
+    background: #d0d0d0;
+}
+
+/* ========== カード ========== */
+
+.card {
+    background: #fff;
+    border-radius: 0 10px 10px 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.card-header h2 { font-size: 1rem; color: #1a1a2e; }
+
+.filters {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filters select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+/* ========== 手動追加フォーム ========== */
+
+.add-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.input {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    flex: 1;
+    min-width: 120px;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #4361ee;
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.15);
+}
+
+.input-sm {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+/* ========== キーワード行 ========== */
+
+.kw-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+}
+
+.kw-row:hover {
+    background: #f8f9ff;
+}
+
+.kw-row:last-child {
+    border-bottom: none;
+}
+
+.kw-checkbox {
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+    cursor: pointer;
+}
+
+.kw-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4361ee;
+}
+
+.kw-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.kw-keyword {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    word-break: break-all;
+}
+
+.kw-exclude {
+    font-size: 0.75rem;
+    color: #e63946;
+    margin-top: 1px;
+}
+
+.kw-source {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 3px;
+    font-size: 0.72rem;
+    color: #999;
+    align-items: center;
+}
+
+.kw-time {
+    background: #fff3cd;
+    color: #856404;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.kw-price {
+    color: #e63946;
+    font-weight: 600;
+}
+
+.kw-name {
+    color: #888;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 250px;
+}
+
+.kw-manual {
+    background: #e8f4fd;
+    color: #4361ee;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* ========== キーワード操作ボタン ========== */
+
+.kw-actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.btn-icon {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+    color: #666;
+}
+
+.btn-icon:hover {
+    background: #f0f0f0;
+    border-color: #bbb;
+}
+
+.btn-icon-danger:hover {
+    background: #fff0f0;
+    border-color: #e63946;
+    color: #e63946;
+}
+
+/* ========== インライン編集 ========== */
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+/* ========== 即売れ商品グリッド ========== */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.product-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    border-left: 3px solid #e63946;
+}
+
+.product-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-card-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    background: #eee;
+}
+
+.product-card-body { padding: 8px 10px; }
+
+.product-card-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-card-price {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e63946;
+}
+
+.product-card-time {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+/* ========== 共通 ========== */
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+/* ========== カテゴリバッジ ========== */
+
+.product-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.category-badge {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.category-hobby {
+    background: #4a3f8a;
+    color: #e0d4ff;
+}
+
+.category-fishing {
+    background: #1a6b4a;
+    color: #c8f7e0;
+}
+
+/* ========== レスポンシブ ========== */
+
+@media (max-width: 600px) {
+    .container { padding: 8px; }
+    .header h1 { font-size: 1.1rem; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .kw-name { max-width: 140px; }
+    .add-form { flex-direction: column; }
+    .filters { flex-wrap: wrap; }
+    .tab { padding: 8px 14px; font-size: 0.82rem; }
+    .card-header { flex-direction: column; align-items: flex-start; }
+}

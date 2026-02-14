@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="即売れ">
+    <title>即売れキーワード整理</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>即売れキーワード整理</h1>
+        <div class="header-actions">
+            <button class="btn btn-primary btn-small" onclick="runScan()">手動スキャン</button>
+            <button class="btn btn-danger btn-small" onclick="runCheck()">手動チェック</button>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value" id="todayScanned">-</div>
+            <div class="stat-label">今日スキャン</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value danger" id="todaySold">-</div>
+            <div class="stat-label">今日即売れ</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value danger" id="weekSold">-</div>
+            <div class="stat-label">7日即売れ</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="pending">-</div>
+            <div class="stat-label">チェック待ち</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="keywordCount">-</div>
+            <div class="stat-label">キーワード数</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value success" id="selectedCount">-</div>
+            <div class="stat-label">選択済み</div>
+        </div>
+    </div>
+
+    <!-- タブ -->
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('keywords')">キーワード整理</button>
+        <button class="tab" onclick="switchTab('sellers')">即売れ商品</button>
+    </div>
+
+    <!-- キーワード整理タブ -->
+    <div class="card" id="keywordsTab">
+        <div class="card-header">
+            <h2>抽出キーワード一覧</h2>
+            <div class="filters">
+                <button class="btn btn-primary btn-small" onclick="selectAll(true)">全選択</button>
+                <button class="btn btn-small" style="background:#888;color:#fff" onclick="selectAll(false)">全解除</button>
+                <button class="btn btn-success btn-small" onclick="exportCSV()">CSV出力</button>
+            </div>
+        </div>
+
+        <!-- 手動追加フォーム -->
+        <div class="add-form">
+            <input type="text" id="addKeyword" placeholder="キーワード" class="input">
+            <input type="text" id="addExclude" placeholder="除外ワード（任意）" class="input">
+            <button class="btn btn-primary btn-small" onclick="addKeyword()">追加</button>
+        </div>
+
+        <div id="keywordList">
+            <div class="loading">読み込み中...</div>
+        </div>
+    </div>
+
+    <!-- 即売れ商品タブ -->
+    <div class="card" id="sellersTab" style="display:none">
+        <div class="card-header">
+            <h2>即売れ商品</h2>
+            <div class="filters">
+                <select onchange="changeDays(this.value)">
+                    <option value="1">今日</option>
+                    <option value="3">3日間</option>
+                    <option value="7" selected>7日間</option>
+                    <option value="30">30日間</option>
+                </select>
+            </div>
+        </div>
+        <div class="product-grid" id="fastSellerList">
+            <div class="loading">読み込み中...</div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+<script>
+// Service Worker 登録
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('SW registered:', reg.scope))
+        .catch(err => console.log('SW registration failed:', err));
+}
+</script>
+</body>
+</html>
